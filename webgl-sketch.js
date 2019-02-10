@@ -92,7 +92,6 @@ const sketch = ({ context }) => {
     },
     // Update & render your scene here
     render({ time, playhead }) {
-      scene.rotation.z = playhead * Math.PI * 2;
       // mesh.rotation.y = 0;
       renderer.render(scene, camera);
     },
