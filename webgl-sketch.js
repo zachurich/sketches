@@ -11,19 +11,19 @@ require("three/examples/js/controls/OrbitControls");
 const settings = {
   // Make the loop animated
   dimensions: [2074, 2074],
-  fps: 60,
-  duration: 4,
+  fps: 30,
+  // duration: 6,
   animate: true,
   // Get a WebGL canvas rather than 2D
   context: "webgl",
   // Turn on MSAA
-  attributes: { antialias: true }
+  attributes: { antialias: true },
 };
 
 const sketch = ({ context }) => {
   // Create a renderer
   const renderer = new THREE.WebGLRenderer({
-    context
+    context,
   });
 
   // WebGL background color
@@ -35,31 +35,31 @@ const sketch = ({ context }) => {
   // Setup your scene
   const box = new THREE.BoxGeometry(1, 1, 1);
   const scene = new THREE.Scene();
-  for (let i = 0; i <= 20; i++) {
+  const elements = [];
+  let mesh;
+  for (let i = 0; i <= 100; i++) {
     const range = Math.floor(random.range(20, 80));
-    const mesh = new THREE.Mesh(
+    mesh = new THREE.Mesh(
       box,
       new THREE.MeshStandardMaterial({
-        color: `hsl(0, 0%,${range}%)`
+        color: `hsl(${random.range(0, 360)}, 100%, ${range}%)`,
       })
     );
+    const position = 10 * (i * 0.015);
     mesh.position.set(
-      random.range(-1, 1),
-      random.range(-1, 1),
-      random.range(-1, 1)
+      random.range(-position, position),
+      random.range(-position, position),
+      random.range(-position, position)
     );
-    mesh.scale.set(
-      random.range(-1, 1),
-      random.range(-1, 1),
-      random.range(-1, 1)
-    );
+
     mesh.scale.multiplyScalar(1);
     scene.add(mesh);
+    elements.push(mesh);
   }
 
   // scene.add(new THREE.AmbientLight("black"));
-  const light = new THREE.DirectionalLight("white", 1);
-  light.position.set(0, 0, 4);
+  const light = new THREE.DirectionalLight("white", 1.5);
+  light.position.set(20, 20, 20);
   scene.add(light);
 
   // draw each frame
@@ -71,7 +71,7 @@ const sketch = ({ context }) => {
 
       const aspect = viewportWidth / viewportHeight;
       // Ortho zoom
-      const zoom = 2.5;
+      const zoom = 20;
 
       // Bounds
       camera.left = -zoom * aspect;
@@ -91,14 +91,20 @@ const sketch = ({ context }) => {
       camera.updateProjectionMatrix();
     },
     // Update & render your scene here
-    render({ time, playhead }) {
-      // mesh.rotation.y = 0;
+    render({ time, playhead, viewportWidth, viewportHeight }) {
+      const aspect = viewportWidth / viewportHeight;
+      elements.forEach((el) => {
+        el.rotation.y = time * el.position.y;
+        el.rotation.z = time * el.position.x;
+
+        // el.scale.y = time <= 5 ? time : el.scale.y;
+      });
       renderer.render(scene, camera);
     },
     // Dispose of events & renderer for cleaner hot-reloading
     unload() {
       renderer.dispose();
-    }
+    },
   };
 };
 
