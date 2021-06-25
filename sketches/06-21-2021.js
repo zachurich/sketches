@@ -1,6 +1,6 @@
 const canvasSketch = require("canvas-sketch");
 const { lerp } = require("canvas-sketch-util/math");
-const { createGrid } = require("./lib/grid");
+const { createGrid } = require("../lib/grid");
 
 const settings = {
   dimensions: [2048, 2048],
