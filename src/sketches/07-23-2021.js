@@ -11,26 +11,6 @@ const settings = {
 };
 
 const margin = 600;
-const randomOffset = random.rangeFloor(1, 10);
-
-// const noiseShape = (context, {width, height, dither}) => {
-//   for (const [x, y] of gridPoints(150, {
-//     margin: 900,
-//     width,
-//     height,
-//   })) {
-//     if (even(random.rangeFloor(0, 100))) {
-//       const variation = random.range(0, 1) * 4; // increase size to the bottom right corner
-//       context.fillStyle = rgba(250, 200, 0, random.range(0, 0.4));
-//       context.fillRect(
-//         x + random.rangeFloor(-dither, dither) + 250,
-//         y + random.rangeFloor(-dither, dither) + 250,
-//         variation,
-//         variation
-//       );
-//     }
-//   }
-// };
 
 const sketch = () => {
   return ({ context, width, height }) => {

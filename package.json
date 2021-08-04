@@ -9,13 +9,22 @@
     "load-asset": "^1.2.0",
     "nice-color-palettes": "^2.0.0",
     "node-vibrant": "^3.2.0-alpha",
+    "p5": "^1.4.0",
     "three": "^0.101.1"
   },
   "devDependencies": {
-    "eslint": "^7.29.0"
+    "eslint": "^7.29.0",
+    "eslint-config-p5js": "^1.1.0",
+    "nodemon": "^2.0.12",
+    "webpack": "^5.48.0",
+    "webpack-cli": "^4.7.2",
+    "webpack-dev-server": "^3.11.2"
   },
   "scripts": {
-    "new": "npx canvas-sketch ./sketches/$(date +%m-%d-%Y).js --new --open --output=./outputs/$(date +%m-%d-%Y)"
+    "canvas-sketch-new": "npx canvas-sketch ./sketches/$(date +%m-%d-%Y).js --new --open --output=./outputs/$(date +%m-%d-%Y)",
+    "canvas-sketch-start": "npx canvas-sketch ./sketches/$(date +%m-%d-%Y).js --open --output=./outputs/$(date +%m-%d-%Y)",
+    "p5-new": "node new-sketch.js $(date +%m-%d-%Y) && webpack serve --env=filename=$(date +%m-%d-%Y) --open",
+    "p5-start": "webpack serve --env=filename=$(date +%m-%d-%Y) --open"
   },
   "keywords": [],
   "author": "",

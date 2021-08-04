@@ -1,9 +1,9 @@
-const { lerp } = require("canvas-sketch-util/math");
+const { lerp } = require('canvas-sketch-util/math');
 
 module.exports.createGrid = (
   count = 5,
   determineX = (coord, count) => coord / (count - 1),
-  determineY = determineX
+  determineY = determineX,
 ) => {
   const points = [];
   for (let x = 0; x < count; x++) {
@@ -23,8 +23,11 @@ module.exports.gridPoints = (count, options = {}) => {
   const gridPoints = this.createGrid(count, determineX, determineY);
   return gridPoints.map(({ position }) => {
     const [u, v] = position;
+
+    // Lerp finds the point between the margin, width - margin, and a specified
+    // decimal point that acts as a percentage
     const x = lerp(margin, width - margin, u);
     const y = lerp(margin, height - margin, v);
-    return [x, y];
+    return [x, y, u, v];
   });
 };
