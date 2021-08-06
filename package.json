@@ -21,10 +21,10 @@
     "webpack-dev-server": "^3.11.2"
   },
   "scripts": {
-    "canvas-sketch-new": "npx canvas-sketch ./sketches/$(date +%m-%d-%Y).js --new --open --output=./outputs/$(date +%m-%d-%Y)",
-    "canvas-sketch-start": "npx canvas-sketch ./sketches/$(date +%m-%d-%Y).js --open --output=./outputs/$(date +%m-%d-%Y)",
-    "p5-new": "node new-sketch.js $(date +%m-%d-%Y) && webpack serve --env=filename=$(date +%m-%d-%Y) --open",
-    "p5-start": "webpack serve --env=filename=$(date +%m-%d-%Y) --open"
+    "canvas-sketch-new": "npx canvas-sketch ./sketches/${FILENAME:-$(date +%m-%d-%Y)}.js --new --open --output=./outputs/${FILENAME:-$(date +%m-%d-%Y)}",
+    "canvas-sketch-start": "npx canvas-sketch ./sketches/${FILENAME:-$(date +%m-%d-%Y)}.js --open --output=./outputs/${FILENAME:-$(date +%m-%d-%Y)}",
+    "p5-new": "node new-sketch.js ${FILENAME:-$(date +%m-%d-%Y)} && webpack serve --env=filename=${FILENAME:-$(date +%m-%d-%Y)} --open",
+    "p5-start": "webpack serve --env=filename=${FILENAME:-$(date +%m-%d-%Y)} --open"
   },
   "keywords": [],
   "author": "",
